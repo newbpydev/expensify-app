@@ -19,6 +19,10 @@ let onSubmit, history, wrapper;
 //   wrapper.find("ExpenseForm").prop("onSubmit")(expenses[1])
 // })
 
+test('should shut the wallaby', () => {
+  
+})
+
 
 
 
