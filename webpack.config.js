@@ -10,8 +10,9 @@ module.exports = function (env, argv) {
     // target: "node",
     entry: "./src/App.js",
     output: {
-      path: path.join(__dirname, "public"),
+      path: path.join(__dirname, "public", "dist"),
       filename: "bundle.js",
+      publicPath: "/dist/",
     },
     mode: "development",
     module: {
