@@ -14,5 +14,4 @@ test("should render header correctly", () => {
 
   // expect(renderer.getRenderOutput()).toMatchSnapshot();
 
-  // console.log(renderer.getRenderOutput())
 });

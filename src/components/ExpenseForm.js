@@ -7,12 +7,10 @@ import "react-dates/initialize";
 import { SingleDatePicker } from "react-dates";
 
 // const now = moment();
-// console.log(now.format("MMM Do, YYYY"));
 
 export default class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
-    // console.log("this is the prop in form", props);
     this.state = {
       description: props.expense ? props.expense.description : "",
       amount: props.expense ? (props.expense.amount / 100).toString() : "",
@@ -47,7 +45,6 @@ export default class ExpenseForm extends React.Component {
   };
   onSubmitHandle = (e) => {
     e.preventDefault();
-    // console.log(this.state);
 
     if (!this.state.description || !this.state.amount) {
       // set error message

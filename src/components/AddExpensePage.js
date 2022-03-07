@@ -36,11 +36,6 @@ const AddExpensePage = (props) => {
         onSubmit={(expense) => {
           props.dispatch(addExpense(expense));
           navigate("/");
-          // props.dispatch(addExpense(expense));
-          // props.history.push('/')
-          // console.log(navigate)
-
-          // console.log(navigate("/"));
         }}
       />
     </div>
@@ -48,7 +43,6 @@ const AddExpensePage = (props) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  // console.log('hi')
   return {
     addExpense: (expense) => dispatch(addExpense(expense)),
   };

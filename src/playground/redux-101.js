@@ -75,6 +75,6 @@ store.dispatch(decermentCount());
 store.dispatch(decermentCount({ decrementBy: 100 }));
 store.dispatch(decermentCount({ decrementBy: 50 }));
 
-console.log(store);
+// console.log(store);
 
 unsubscribe;
