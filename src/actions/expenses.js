@@ -71,6 +71,20 @@ export const removeExpense = ({ id } = {}) => ({
   id,
 });
 
+export const startRemoveExpense = (expenseId) => {
+  return (dispatch) => {
+    const id = expenseId
+
+    return remove(ref(database, `expenses/${id}`))
+      .then(() => {
+        dispatch(removeExpense(id))
+        console.log(`removed item`);
+      })
+      .catch((e) => console.log('delete failed. ', e))
+
+  }
+}
+
 //* EDIT_EXPENSE
 export const editExpense = (id, updates) => ({
   type: "EDIT_EXPENSE",

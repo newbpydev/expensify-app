@@ -5,6 +5,7 @@ import {
   removeExpense,
   setExpenses,
   startSetExpenses,
+  startRemoveExpense,
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import configureMockStore from "redux-mock-store";
@@ -17,7 +18,6 @@ const createMockStore = configureMockStore([thunk]);
 beforeEach((done) => {
   const expensesData = {}
   expenses.forEach(({id, description, amount, note, createdAt}) => {
-    // console.log(id, description, amount, note, createdAt)
     expensesData[id] = {description, amount, note, createdAt}
   })
   set(ref(database, "expenses"), expensesData).then(() => done())
@@ -137,6 +137,16 @@ test("should fetch fetch the expenses from firebase", (done) => {
     done();
   })
   
+})
+
+test("should remove expenses from firebase", () => {
+  const store = createMockStore({})
+
+  store.dispatch(startRemoveExpense(expenses[2].id)).then((snapshot) => {
+    // console.log(snapshot)
+    const actions = store.getActions()
+    expect(actions[0]).toEqual()
+  })
 })
 
 
