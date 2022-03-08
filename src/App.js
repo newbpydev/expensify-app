@@ -7,6 +7,9 @@ import { addExpense, editExpense } from "./actions/expenses";
 import * as filter from "./actions/filters";
 import getVisibleExpenses from "./selectors/expenses";
 
+import "./firebase/firebase"
+// import "./playground/promises"
+
 import "normalize.css/normalize.css";
 import "./styles/style.scss";
 import "react-dates/lib/css/_datepicker.css";

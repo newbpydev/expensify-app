@@ -1,7 +1,7 @@
 import React from "react";
 import ExpenseForm from "./ExpenseForm";
 import { connect } from "react-redux";
-import { addExpense, editExpense } from "../actions/expenses";
+import { startAddExpense, addExpense, editExpense } from "../actions/expenses";
 
 import { useNavigate, Navigate } from "react-router-dom";
 
@@ -34,7 +34,7 @@ const AddExpensePage = (props) => {
       <h1>Add Expense</h1>
       <ExpenseForm
         onSubmit={(expense) => {
-          props.dispatch(addExpense(expense));
+          props.dispatch(startAddExpense(expense));
           navigate("/");
         }}
       />
@@ -44,7 +44,7 @@ const AddExpensePage = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addExpense: (expense) => dispatch(addExpense(expense)),
+    startAddExpense: (expense) => dispatch(startAddExpense(expense)),
   };
 };
 
