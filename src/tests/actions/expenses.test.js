@@ -16,20 +16,41 @@ import { ref, get, set } from "firebase/database";
 const createMockStore = configureMockStore([thunk]);
 
 beforeEach((done) => {
-  const expensesData = {}
-  expenses.forEach(({id, description, amount, note, createdAt}) => {
-    expensesData[id] = {description, amount, note, createdAt}
-  })
-  set(ref(database, "expenses"), expensesData).then(() => done())
-  
-})
+  const expensesData = {};
+  expenses.forEach(({ id, description, amount, note, createdAt }) => {
+    expensesData[id] = { description, amount, note, createdAt };
+  });
+  // console.log(expensesData)
+  set(ref(database, "expenses"), expensesData).then(() => done());
+});
 
-test("should remove an expense data", () => {
+test("should setup remove expense action object", () => {
   const action = removeExpense({ id: "123abc" });
   expect(action).toEqual({
     type: "REMOVE_EXPENSE",
     id: "123abc",
   });
+});
+
+test("should remove expense from firebase", (done) => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+
+  store
+    .dispatch(startRemoveExpense({ id }))
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: "REMOVE_EXPENSE",
+        id,
+      });
+
+      return get(ref(database, `expenses/${id}`));
+    })
+    .then((snapshot) => {
+      expect(snapshot.val()).toBeFalsy();
+      done();
+    });
 });
 
 test("should edit an expense data item", () => {
@@ -86,7 +107,6 @@ test("Should add an expense to data with provided values", () => {
 //     });
 // });
 
-
 // test("should add expense with default to database and store", (done) => {
 //     const store = createMockStore({});
 //     const expenseDefault = {
@@ -119,57 +139,35 @@ test("Should add an expense to data with provided values", () => {
 // });
 
 test("should setup set expense action with data", () => {
-  const action = setExpenses(expenses)
+  const action = setExpenses(expenses);
+  // console.log(action);
   expect(action).toEqual({
     type: "SET_EXPENSES",
-    expenses
-  })
-})
+    expenses,
+  });
+});
 
 test("should fetch fetch the expenses from firebase", (done) => {
-  const store = createMockStore({})
+  const store = createMockStore({});
   store.dispatch(startSetExpenses()).then(() => {
-    const actions = store.getActions()
+    const actions = store.getActions();
     expect(actions[0]).toEqual({
       type: "SET_EXPENSES",
-      expenses
-    })
+      expenses,
+    });
     done();
-  })
-  
-})
+  });
+});
 
-test("should remove expenses from firebase", () => {
-  const store = createMockStore({})
+// test("should remove expenses from firebase", () => {
+//   const store = createMockStore({});
 
-  store.dispatch(startRemoveExpense(expenses[2].id)).then((snapshot) => {
-    // console.log(snapshot)
-    const actions = store.getActions()
-    expect(actions[0]).toEqual()
-  })
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//   store.dispatch(startRemoveExpense(expenses[2].id)).then((snapshot) => {
+//     // console.log(snapshot)
+//     const actions = store.getActions();
+//     // expect(actions[0]).toEqual()
+//   });
+// });
 
 // test("Should add an expense to data with default values", () => {
 //   const action = addExpense()
