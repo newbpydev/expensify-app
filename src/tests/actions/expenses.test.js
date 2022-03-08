@@ -1,57 +1,123 @@
-import { addExpense, editExpense, removeExpense } from "../../actions/expenses";
+import {
+  startAddExpense,
+  addExpense,
+  editExpense,
+  removeExpense,
+} from "../../actions/expenses";
+import expenses from "../fixtures/expenses";
+import configureMockStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import database from "../../firebase/firebase";
+import { ref, get } from "firebase/database";
 
-test('should remove an expense data', () => { 
-  const action = removeExpense({ id: "123abc" })
+const createMockStore = configureMockStore([thunk]);
+
+test("should remove an expense data", () => {
+  const action = removeExpense({ id: "123abc" });
   expect(action).toEqual({
     type: "REMOVE_EXPENSE",
-    id: "123abc"
-  })
-})
- 
+    id: "123abc",
+  });
+});
+
 test("should edit an expense data item", () => {
-  const action = editExpense("abc123", {description: "rent", amount: 123}
-  )
-  
+  const action = editExpense("abc123", { description: "rent", amount: 123 });
+
   expect(action).toEqual({
     type: "EDIT_EXPENSE",
     id: "abc123",
     updates: {
       amount: 123,
-      description: "rent"
-    }
-  })
-})
-
-test("Should add an expense to data", () => {
-  const expenseData = {
-    description: "rent bill",
-    note: "it is expensive",
-    amount: 1234,
-    createdAt: 600,
-  };
-  const action = addExpense(expenseData)
-  
-  expect(action).toEqual({
-    expense: {
-      ...expenseData,
-      id: expect.any(String),
-      
+      description: "rent",
     },
+  });
+});
+
+test("Should add an expense to data with provided values", () => {
+  const action = addExpense(expenses[2]);
+
+  expect(action).toEqual({
+    expense: expenses[2],
     type: "ADD_EXPENSE",
   });
-})
-test("Should add an expense to data with default values", () => {
-  const action = addExpense()
-  
-  expect(action).toEqual({
-    expense: {
-      id: expect.any(String),
+});
+
+//! we pass "done" in the callback to then call it to wait for async data to return
+// test("should add expense to database and store", (done) => {
+//   const store = createMockStore({});
+//   const expenseData = {
+//     description: "Mouse",
+//     note: "it was a horrible mouse",
+//     amount: 27000,
+//     createdAt: 20000,
+//   };
+
+//   store
+//     .dispatch(startAddExpense(expenseData))
+//     .then(() => {
+//       const actions = store.getActions();
+
+//       expect(actions[0]).toEqual({
+//         type: "ADD_EXPENSE",
+//         expense: {
+//           id: expect.any(String),
+//           ...expenseData,
+//         },
+//       });
+
+//       //* checking inside the database to see if item matches
+//       return get(ref(database, `expenses/${actions[0].expense.id}`));
+//     })
+//     .then((snapshot) => {
+//       expect(snapshot.val).toEqual(expenseData)
+//       done();
+//     });
+// });
+
+
+test("should add expense with default to database and store", (done) => {
+    const store = createMockStore({});
+    const expenseDefault = {
       description: "",
       note: "",
       amount: 0,
       createdAt: 0,
-    },
-    type: "ADD_EXPENSE",
-    
-  })
-})
+    };
+
+    store
+      .dispatch(startAddExpense({}))
+      .then(() => {
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual({
+          type: "ADD_EXPENSE",
+          expense: {
+            id: expect.any(String),
+            ...expenseDefault,
+          },
+        });
+
+        //* checking inside the database to see if item matches
+        return get(ref(database, `expenses/${actions[0].expense.id}`));
+      })
+      .then((snapshot) => {
+        expect(snapshot.val()).toEqual(expenseDefault);
+        done()
+      });
+});
+
+// test("Should add an expense to data with default values", () => {
+//   const action = addExpense()
+
+//   expect(action).toEqual({
+//     expense: {
+//       id: expect.any(String),
+//       description: "",
+//       note: "",
+//       amount: 0,
+//       createdAt: 0,
+//     },
+//     type: "ADD_EXPENSE",
+
+//   })
+// })
