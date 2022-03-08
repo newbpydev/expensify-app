@@ -22,7 +22,7 @@ import {
 //* ADD_EXPENSE
 export const addExpense = (expense) => ({
   type: "ADD_EXPENSE",
-  expense
+  expense,
 });
 
 // export const addExpense = ({
@@ -42,7 +42,7 @@ export const addExpense = (expense) => ({
 // });
 
 /* */
-//*  d
+//*  adding Expenses to database and Redux
 export const startAddExpense = (expenseData = {}) => {
   return (dispatch) => {
     const {
@@ -52,17 +52,18 @@ export const startAddExpense = (expenseData = {}) => {
       createdAt = 0,
     } = expenseData;
 
-    const expense = {description, note, amount, createdAt}
+    const expense = { description, note, amount, createdAt };
 
-    return push(ref(database, "expenses"), expense)
-      .then((ref) => {
-        dispatch(addExpense({
+    return push(ref(database, "expenses"), expense).then((ref) => {
+      dispatch(
+        addExpense({
           id: ref.key,
-          ...expense
-        }))
-       })
-  }
-}
+          ...expense,
+        })
+      );
+    });
+  };
+};
 
 //* REMOVE_EXPENSE
 export const removeExpense = ({ id } = {}) => ({
@@ -76,3 +77,28 @@ export const editExpense = (id, updates) => ({
   id,
   updates,
 });
+
+//*SET_EXPENSES
+export const setExpenses = (expenses) => ({
+  type: "SET_EXPENSES",
+  expenses,
+});
+
+export const startSetExpenses = () => {
+  return (dispatch) => {
+    return get(ref(database, "expenses"))
+      .then((snapshot) => {
+        const expenses = [];
+
+        snapshot.forEach((childSnapshot) => {
+          expenses.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val(),
+          });
+        });
+
+
+        dispatch(setExpenses(expenses));
+      })
+  };
+};

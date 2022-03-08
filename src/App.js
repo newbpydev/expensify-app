@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
 import configureStore from "./store/configureStore";
-import { addExpense, editExpense } from "./actions/expenses";
+import { startSetExpenses, editExpense } from "./actions/expenses";
 import * as filter from "./actions/filters";
 import getVisibleExpenses from "./selectors/expenses";
 
@@ -26,6 +26,16 @@ const jsx = (
 );
 
 ReactDOM.render(
-  <React.StrictMode>{jsx}</React.StrictMode>,
+  <React.StrictMode><p>Loading...</p></React.StrictMode>,
   document.getElementById("root")
 );
+
+//* load app on success of dataset
+store.dispatch(startSetExpenses()).then(() => {
+  ReactDOM.render(
+    <React.StrictMode>{jsx}</React.StrictMode>,
+    document.getElementById("root")
+  );
+
+})
+
