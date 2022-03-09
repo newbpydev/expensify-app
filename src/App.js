@@ -8,7 +8,7 @@ import * as filter from "./actions/filters";
 import getVisibleExpenses from "./selectors/expenses";
 
 import "./firebase/firebase"
-// import "./playground/promises"
+import { getAuth } from "firebase/auth";
 
 import "normalize.css/normalize.css";
 import "./styles/style.scss";
@@ -37,5 +37,13 @@ store.dispatch(startSetExpenses()).then(() => {
     document.getElementById("root")
   );
 
+})
+
+getAuth().onAuthStateChanged((user) => {
+  if (user) {
+    console.log("logged in")
+  } else {
+    console.log("logged out")
+  }
 })
 

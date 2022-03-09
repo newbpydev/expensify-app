@@ -1,5 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { initializeApp,  } from "firebase/app";
+import { getAnalytics,  } from "firebase/analytics";
 import {
   getDatabase,
   ref,
@@ -13,8 +13,9 @@ import {
   push,
   onChildRemoved,
   onChildChanged,
-  onChildAdded
+  onChildAdded,
 } from "firebase/database";
+import {getAuth, signInWithCredential, GoogleAuthProvider} from "firebase/auth"
 
 // const firebaseConfig = {
 //   apiKey: "AIzaSyAkt-5gj7WnKgIIT5eOz33-sanl2htC-CY",
@@ -42,5 +43,6 @@ const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 
 const database = getDatabase();
+const googleAuthProvider = new GoogleAuthProvider()
 
-export { database as default };
+export {googleAuthProvider, database as default };
