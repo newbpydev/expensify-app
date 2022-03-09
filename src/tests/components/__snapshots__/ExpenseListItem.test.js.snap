@@ -9,7 +9,7 @@ exports[`should render ExpenseListItem with expense 1`] = `
           "id": "2",
         }
       }
-      to="edit/2"
+      to="/edit/2"
     >
       gas
     </Link>

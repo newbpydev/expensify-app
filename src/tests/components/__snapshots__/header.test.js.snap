@@ -10,7 +10,7 @@ exports[`should render header correctly 1`] = `
       <li>
         <NavLink
           className={[Function]}
-          to="/"
+          to="/dashboard"
         >
           Dashboard
         </NavLink>
@@ -30,6 +30,13 @@ exports[`should render header correctly 1`] = `
         >
           Help
         </NavLink>
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          Logout
+        </button>
       </li>
     </ul>
   </nav>

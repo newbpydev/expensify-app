@@ -128,7 +128,8 @@ exports[`should render ExpenseForm correctly 1`] = `
       value=""
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -262,7 +263,8 @@ exports[`should render ExpenseForm with data 1`] = `
       value="it is expensive"
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -396,7 +398,8 @@ exports[`should render error for invalid form submission 1`] = `
       value=""
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -533,7 +536,8 @@ exports[`should render error for invalid form submission 2`] = `
       value=""
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -667,7 +671,8 @@ exports[`should set amount on input change 1`] = `
       value=""
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -801,7 +806,8 @@ exports[`should set amount on input change 2`] = `
       value=""
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -935,7 +941,8 @@ exports[`should set calendarFocus onFocusChange 1`] = `
       value=""
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -1069,7 +1076,8 @@ exports[`should set calendarFocus onFocusChange 2`] = `
       value=""
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -1203,7 +1211,8 @@ exports[`should set new date on date change 1`] = `
       value=""
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -1337,7 +1346,8 @@ exports[`should set note on textarea change 1`] = `
       value=""
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -1471,7 +1481,8 @@ exports[`should set note on textarea change 2`] = `
       value="this is a note"
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -1605,7 +1616,8 @@ exports[`should set wrong amount on input change 1`] = `
       value=""
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
@@ -1739,7 +1751,8 @@ exports[`should set wrong amount on input change 2`] = `
       value=""
     />
     <button>
-      Add Expense
+      Add
+       Expense
     </button>
   </form>
 </div>
