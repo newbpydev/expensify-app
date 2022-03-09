@@ -23,7 +23,7 @@ export const history = createBrowserHistory()
 
 
 const AppRouter = () => (
-  <BrowserRouter>
+  <HistoryRouter history={history}>
     <div>
       <Header />
       <Routes>
@@ -32,18 +32,11 @@ const AppRouter = () => (
         <Route path="create" element={<AddExpensePage />} />
         <Route path="/edit/" element={<EditExpensePage />} />
         <Route path="/edit/:id" element={<EditExpensePage />} />
-        {/* <Route path="edit" element={<EditExpensePage />}>
-          <Route
-            path=":id"
-            element={<EditExpensePage />}
-            render={(props) => <EditExpensePage id={props} />}
-          />
-        </Route> */}
         <Route path="help" element={<HelpPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
-  </BrowserRouter>
+  </HistoryRouter>
 );
 
 export default AppRouter;

@@ -7,22 +7,14 @@ import { startSetExpenses, editExpense } from "./actions/expenses";
 import * as filter from "./actions/filters";
 import getVisibleExpenses from "./selectors/expenses";
 
-import "./firebase/firebase"
+import "./firebase/firebase";
 import { getAuth } from "firebase/auth";
 
 import "normalize.css/normalize.css";
 import "./styles/style.scss";
 import "react-dates/lib/css/_datepicker.css";
 
-import AppRouter from "./routers/AppRouter";
-import {
-  useNavigate,
-  Navigate,
-  unstable_HistoryRouter as HistoryRouter,
-} from "react-router-dom";
-import { createBrowserHistory } from "history";
-
-const history = createBrowserHistory({ window });
+import AppRouter, { history } from "./routers/AppRouter";
 
 const store = configureStore();
 
@@ -33,25 +25,36 @@ const jsx = (
 );
 
 ReactDOM.render(
-  <React.StrictMode><p>Loading...</p></React.StrictMode>,
+  <React.StrictMode>
+    <p>Loading...</p>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 
-//* load app on success of dataset
-store.dispatch(startSetExpenses()).then(() => {
-  ReactDOM.render(
-    <React.StrictMode>{jsx}</React.StrictMode>,
-    document.getElementById("root")
-  );
-
-})
+//* this will let the app render only once
+let hasRendered = false;
+const renderApp = () => {
+  if (!hasRendered) {
+    ReactDOM.render(
+      <React.StrictMode>{jsx}</React.StrictMode>,
+      document.getElementById("root")
+    );
+    hasRendered = true;
+  }
+};
 
 getAuth().onAuthStateChanged((user) => {
   if (user) {
-    console.log("logged in")
-  } else {
-    console.log("logged out")
-    // <Navigate to={"/"} />;
-  }
-})
+    //* load app on success of dataset
+    store.dispatch(startSetExpenses()).then(() => {
+      renderApp();
 
+      if (history.location.pathname === "/") {
+        history.push("/dashboard");
+      }
+    });
+  } else {
+    renderApp();
+    history.push("/");
+  }
+});
