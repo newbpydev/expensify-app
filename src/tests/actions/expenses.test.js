@@ -6,12 +6,14 @@ import {
   setExpenses,
   startSetExpenses,
   startRemoveExpense,
+  startEditExpense,
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import database from "../../firebase/firebase";
 import { ref, get, set } from "firebase/database";
+import { create } from "react-test-renderer";
 
 const createMockStore = configureMockStore([thunk]);
 
@@ -24,6 +26,8 @@ beforeEach((done) => {
   set(ref(database, "expenses"), expensesData).then(() => done());
 });
 
+//* ////////////////////////////////////////////
+//* REMOVE EXPENSES
 test("should setup remove expense action object", () => {
   const action = removeExpense({ id: "123abc" });
   expect(action).toEqual({
@@ -53,6 +57,8 @@ test("should remove expense from firebase", (done) => {
     });
 });
 
+//* ////////////////////////////////////////////
+//* EDIT EXPENSES
 test("should edit an expense data item", () => {
   const action = editExpense("abc123", { description: "rent", amount: 123 });
 
@@ -66,6 +72,34 @@ test("should edit an expense data item", () => {
   });
 });
 
+test("should edit expenses from firebase", (done) => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+  const updates = {
+    amount: 33399,
+  };
+  // console.log(updates); //?
+
+  store
+    .dispatch(startEditExpense(id, updates))
+    .then(() => {
+      const actions = store.getActions();
+      console.log(actions[0]); //?
+      expect(actions[0]).toEqual({
+        type: "EDIT_EXPENSE",
+        id,
+        updates,
+      });
+      return get(ref(database, `expenses/${id}`));
+    })
+    .then((snapshot) => {
+      expect(snapshot.val().amount).toBe(updates.amount); 
+      done();
+    });
+});
+
+//* ////////////////////////////////////////////
+//* ADD EXPENSES
 test("Should add an expense to data with provided values", () => {
   const action = addExpense(expenses[2]);
 
@@ -138,6 +172,8 @@ test("Should add an expense to data with provided values", () => {
 //       });
 // });
 
+//* ////////////////////////////////////////////
+//* SET EXPENSES
 test("should setup set expense action with data", () => {
   const action = setExpenses(expenses);
   // console.log(action);
@@ -159,15 +195,8 @@ test("should fetch fetch the expenses from firebase", (done) => {
   });
 });
 
-// test("should remove expenses from firebase", () => {
-//   const store = createMockStore({});
-
-//   store.dispatch(startRemoveExpense(expenses[2].id)).then((snapshot) => {
-//     // console.log(snapshot)
-//     const actions = store.getActions();
-//     // expect(actions[0]).toEqual()
-//   });
-// });
+//* ////////////////////////////////////////////
+//* REMOVE EXPENSES
 
 // test("Should add an expense to data with default values", () => {
 //   const action = addExpense()
