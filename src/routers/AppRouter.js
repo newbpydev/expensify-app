@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
 import React from "react";
 
+import {LoginPage} from "../components/LoginPage";
 import AddExpensePage from "../components/AddExpensePage"
 import EditExpensePage from "../components/EditExpensePage"
 import ExpenseDashboardPage from "../components/ExpenseDashboardPage"
@@ -17,10 +18,11 @@ const AppRouter = () => (
     <div>
       <Header />
       <Routes>
-        <Route path="/" element={<ExpenseDashboardPage />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="dashboard" element={<ExpenseDashboardPage />} />
         <Route path="create" element={<AddExpensePage />} />
-        <Route path="edit/" element={<EditExpensePage />} />
-        <Route path="edit/:id" element={<EditExpensePage />} />
+        <Route path="/edit/" element={<EditExpensePage />} />
+        <Route path="/edit/:id" element={<EditExpensePage />} />
         {/* <Route path="edit" element={<EditExpensePage />}>
           <Route
             path=":id"

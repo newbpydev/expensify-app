@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const ExpenseListItem = ({id, description, amount, createdAt, expenses, dispatch }) => (
   <div>
-    <h3><Link to={`edit/${id}`} state={{id}}>{description}</Link></h3>
+    <h3><Link to={`/edit/${id}`} state={{id}}>{description}</Link></h3>
     <p>
       Amount: {numeral(amount / 100).format("$0,0.00")}
       -

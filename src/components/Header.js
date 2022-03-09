@@ -10,7 +10,7 @@ const Header = () => (
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? "is-active" : "")}
-            to="/"
+            to="/dashboard"
           >
             Dashboard
           </NavLink>

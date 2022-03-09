@@ -33,9 +33,10 @@ const AddExpensePage = (props) => {
     <div>
       <h1>Add Expense</h1>
       <ExpenseForm
+        isEditForm={false}
         onSubmit={(expense) => {
           props.dispatch(startAddExpense(expense));
-          navigate("/");
+          navigate("/dashboard");
         }}
       />
     </div>

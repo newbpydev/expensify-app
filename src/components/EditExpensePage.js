@@ -17,16 +17,17 @@ const EditExpensePage = (props) => {
   return (
     <div>
       <ExpenseForm
+        isEditForm={true}
         expense={expenseData}
         onSubmit={(expense) => {
           props.dispatch(startEditExpense(id, expense));
-          navigate("/");
+          navigate("/dashboard");
         }}
       />
       <button
         onClick={(e) => {
           props.dispatch(startRemoveExpense({ id }));
-          navigate("/");
+          navigate("/dashboard");
         }}
       >
         Remove
