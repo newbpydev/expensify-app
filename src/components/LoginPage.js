@@ -8,9 +8,11 @@ export function LoginPage({startLogin}) {
   return (
     <div>
       <h1>This is the LoginPage</h1>
-      <button onClick={startLogin}>Login</button>
+      <button id="btn-login" onClick={startLogin}>
+        Login
+      </button>
     </div>
-  )
+  );
 }
 
 const mapDispatchToProps = (dispatch) => ({

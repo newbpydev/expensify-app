@@ -33,6 +33,7 @@ exports[`should render header correctly 1`] = `
       </li>
       <li>
         <button
+          id="btn-logout"
           onClick={[Function]}
         >
           Logout

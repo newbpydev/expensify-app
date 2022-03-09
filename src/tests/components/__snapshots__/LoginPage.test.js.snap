@@ -5,7 +5,9 @@ exports[`should render the LoginPage correctly 1`] = `
   <h1>
     This is the LoginPage
   </h1>
-  <button>
+  <button
+    id="btn-login"
+  >
     Login
   </button>
 </div>

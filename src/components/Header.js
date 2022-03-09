@@ -35,7 +35,7 @@ export const Header = ({ startLogout }) => (
           </NavLink>
         </li>
         <li>
-          <button onClick={startLogout}>Logout</button>
+          <button id="btn-logout" onClick={startLogout}>Logout</button>
         </li>
       </ul>
     </nav>
