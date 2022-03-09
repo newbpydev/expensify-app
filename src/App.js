@@ -15,9 +15,16 @@ import "./styles/style.scss";
 import "react-dates/lib/css/_datepicker.css";
 
 import AppRouter from "./routers/AppRouter";
+import {
+  useNavigate,
+  Navigate,
+  unstable_HistoryRouter as HistoryRouter,
+} from "react-router-dom";
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory({ window });
 
 const store = configureStore();
-
 
 const jsx = (
   <Provider store={store}>
@@ -44,6 +51,7 @@ getAuth().onAuthStateChanged((user) => {
     console.log("logged in")
   } else {
     console.log("logged out")
+    // <Navigate to={"/"} />;
   }
 })
 

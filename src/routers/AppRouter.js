@@ -1,6 +1,14 @@
 
-import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
+import {
+  BrowserRouter,
+  unstable_HistoryRouter as HistoryRouter,
+  Routes,
+  Route,
+  Link,
+  NavLink,
+} from "react-router-dom";
 import React from "react";
+import { createBrowserHistory } from "history";
 
 import LoginPage from "../components/LoginPage";
 import AddExpensePage from "../components/AddExpensePage"
@@ -10,7 +18,8 @@ import Header from "../components/Header"
 import HelpPage from "../components/HelpPage"
 import NotFoundPage from "../components/NotFoundPage"
 
-
+export const history = createBrowserHistory()
+// const histo = BrowserRouterProps()
 
 
 const AppRouter = () => (
