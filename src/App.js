@@ -3,9 +3,8 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
 import configureStore from "./store/configureStore";
-import { startSetExpenses, editExpense } from "./actions/expenses";
-import * as filter from "./actions/filters";
-import getVisibleExpenses from "./selectors/expenses";
+import { startSetExpenses } from "./actions/expenses";
+import { login, logout } from "./actions/auth";
 
 import "./firebase/firebase";
 import { getAuth } from "firebase/auth";
@@ -46,6 +45,7 @@ const renderApp = () => {
 getAuth().onAuthStateChanged((user) => {
   if (user) {
     //* load app on success of dataset
+    store.dispatch(login(user.uid))
     store.dispatch(startSetExpenses()).then(() => {
       renderApp();
 
@@ -54,6 +54,7 @@ getAuth().onAuthStateChanged((user) => {
       }
     });
   } else {
+    store.dispatch(logout())
     renderApp();
     history.push("/");
   }
