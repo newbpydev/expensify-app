@@ -6,11 +6,14 @@ import { startLogin } from "../actions/auth";
 export function LoginPage({startLogin}) {
   // console.log(props)
   return (
-    <div>
-      <h1>This is the LoginPage</h1>
-      <button id="btn-login" onClick={startLogin}>
-        Login
-      </button>
+    <div className="box-layout">
+      <div className="box-layout__box">
+        <h1 className="box-layout__title">Expensify</h1>
+        <p>It's time to get your expenses under control.</p>
+        <button className="button" id="btn-login" onClick={startLogin}>
+          Login with Google
+        </button>
+      </div>
     </div>
   );
 }
