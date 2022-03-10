@@ -52,7 +52,7 @@ getAuth().onAuthStateChanged((user) => {
       if (history.location.pathname === "/") {
         history.push("/dashboard");
       }
-    });
+    }).catch((e) => console.log(e));
   } else {
     store.dispatch(logout())
     renderApp();
