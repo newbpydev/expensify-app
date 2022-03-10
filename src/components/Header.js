@@ -5,18 +5,27 @@ import { connect } from "react-redux";
 import { map } from "@firebase/util";
 
 export const Header = ({ startLogout }) => (
-  <header>
-    <h1>Expensify</h1>
+  <header className="header">
+    <div className="content-container">
+      <div className="header__content">
+        <Link className="header__title" to="/dashboard">
+          <h1>Expensify</h1>
+        </Link>
+        <button id="btn-logout" onClick={startLogout}>
+          Logout
+        </button>
+      </div>
+    </div>
 
-    <nav>
+    {/* <nav>
       <ul>
         <li>
-          <NavLink
-            className={({ isActive }) => (isActive ? "is-active" : "")}
+          <Link
+            // className={({ isActive }) => (isActive ? "is-active" : "")}
             to="/dashboard"
           >
-            Dashboard
-          </NavLink>
+            <h1>Expensify</h1>
+          </Link>
         </li>
         <li>
           <NavLink
@@ -27,15 +36,17 @@ export const Header = ({ startLogout }) => (
           </NavLink>
         </li>
         <li>
-          <button id="btn-logout" onClick={startLogout}>Logout</button>
+          <button id="btn-logout" onClick={startLogout}>
+            Logout
+          </button>
         </li>
       </ul>
-    </nav>
+    </nav> */}
   </header>
 );
 
 const mapDispatchToProps = (dispatch) => ({
-  startLogout: () => dispatch(startLogout())
-})
+  startLogout: () => dispatch(startLogout()),
+});
 
 export default connect(undefined, mapDispatchToProps)(Header);
