@@ -73,51 +73,54 @@ export default class ExpenseForm extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.error && <p>{this.state.error}</p>}
-        <form action="" onSubmit={this.onSubmitHandle}>
-          <input
-            type="text"
-            name="description"
-            id="description"
-            placeholder="Description"
-            autoFocus
-            value={this.state.description}
-            onChange={this.onDescriptionChange}
-            // required
-          />
-          <input
-            type="text"
-            name="amount"
-            id="amount"
-            placeholder="Amount"
-            value={this.state.amount}
-            onChange={this.onAmountChange}
-            // required
-          />
+      <form className="form" action="" onSubmit={this.onSubmitHandle}>
+        {this.state.error && <p className="form__error">{this.state.error}</p>}
+        <input
+          className="text-input"
+          type="text"
+          name="description"
+          id="description"
+          placeholder="Description"
+          autoFocus
+          value={this.state.description}
+          onChange={this.onDescriptionChange}
+          // required
+        />
+        <input
+          className="text-input"
+          type="text"
+          name="amount"
+          id="amount"
+          placeholder="Amount"
+          value={this.state.amount}
+          onChange={this.onAmountChange}
+          // required
+        />
 
-          <SingleDatePicker
-            date={this.state.createdAt}
-            onDateChange={this.onDateChange}
-            focused={this.state.calendarFocused}
-            onFocusChange={this.onFocusChange}
-            id="tisisis"
-            numberOfMonths={1}
-            isOutsideRange={() => false}
-          />
+        <SingleDatePicker
+          date={this.state.createdAt}
+          onDateChange={this.onDateChange}
+          focused={this.state.calendarFocused}
+          onFocusChange={this.onFocusChange}
+          id="tisisis"
+          numberOfMonths={1}
+          isOutsideRange={() => false}
+        />
 
-          <textarea
-            name="note"
-            id="note"
-            cols="39"
-            rows="5"
-            value={this.state.note}
-            onChange={this.onNoteChange}
-            placeholder="Add a note for your expense (optional)"
-          ></textarea>
-          <button>{this.props.isEditForm ? "Edit" : "Add"} Expense</button>
-        </form>
-      </div>
+        <textarea
+          className="textarea"
+          name="note"
+          id="note"
+          cols="39"
+          rows="5"
+          value={this.state.note}
+          onChange={this.onNoteChange}
+          placeholder="Add a note for your expense (optional)"
+        ></textarea>
+        <div>
+          <button className="button">{this.props.isEditForm ? "Edit" : "Save"} Expense</button>
+        </div>
+      </form>
     );
   }
 }
