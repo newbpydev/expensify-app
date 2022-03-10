@@ -44,7 +44,8 @@ export const addExpense = (expense) => ({
 /* */
 //*  adding Expenses to database and Redux
 export const startAddExpense = (expenseData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {  //! <= <= IMPORTANT: GETSTATE HAS THE ID
+    const uid = getState().auth.uid //* getting user id
     const {
       description = "",
       note = "",
@@ -54,7 +55,7 @@ export const startAddExpense = (expenseData = {}) => {
 
     const expense = { description, note, amount, createdAt };
 
-    return push(ref(database, "expenses"), expense).then((ref) => {
+    return push(ref(database, `users/${uid}/expenses`), expense).then((ref) => {
       dispatch(
         addExpense({
           id: ref.key,
@@ -72,8 +73,9 @@ export const removeExpense = ({ id } = {}) => ({
 });
 
 export const startRemoveExpense = ({id} = {}) => {
-  return (dispatch) => {
-    return remove(ref(database, `expenses/${id}`))
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
+    return remove(ref(database, `users/${uid}/expenses/${id}`))
       .then(() => {
         dispatch(removeExpense({id}))
       })
@@ -91,8 +93,10 @@ export const editExpense = (id, updates) => ({
 
 
 export const startEditExpense = (id, updates) => {
-  return (dispatch) => {
-    return update(ref(database, `expenses/${id}`), updates).then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
+
+    return update(ref(database, `users/${uid}/expenses/${id}`), updates).then(() => {
       dispatch(editExpense(id, updates))
     })
   }
@@ -105,8 +109,9 @@ export const setExpenses = (expenses) => ({
 });
 
 export const startSetExpenses = () => {
-  return (dispatch) => {
-    return get(ref(database, "expenses"))
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid
+    return get(ref(database, `users/${uid}/expenses`))
       .then((snapshot) => {
         const expenses = [];
 
