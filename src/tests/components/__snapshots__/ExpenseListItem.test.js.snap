@@ -1,24 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render ExpenseListItem with expense 1`] = `
-<div>
-  <h3>
-    <Link
-      state={
-        Object {
-          "id": "2",
-        }
-      }
-      to="/edit/2"
+<Link
+  className="list-item"
+  state={
+    Object {
+      "id": "2",
+    }
+  }
+  to="/edit/2"
+>
+  <div>
+    <h3
+      className="list-item__title"
     >
       gas
-    </Link>
-  </h3>
-  <p>
-    Amount: 
+    </h3>
+    <span
+      className="list-item__sub-title"
+    >
+      December 27th, 1969
+    </span>
+  </div>
+  <h3
+    className="list-item__data"
+  >
     $19.00
-    - Created At: 
-    December 27th, 1969
-  </p>
-</div>
+  </h3>
+</Link>
 `;
