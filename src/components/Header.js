@@ -21,17 +21,9 @@ export const Header = ({ startLogout }) => (
         <li>
           <NavLink
             className={({ isActive }) => (isActive ? "is-active" : "")}
-            to="create"
+            to="/create"
           >
             Create Expense
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={({ isActive }) => (isActive ? "is-active" : "")}
-            to="help"
-          >
-            Help
           </NavLink>
         </li>
         <li>

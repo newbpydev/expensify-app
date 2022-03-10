@@ -15,19 +15,21 @@ import EditExpensePage from "../components/EditExpensePage";
 import ExpenseDashboardPage from "../components/ExpenseDashboardPage";
 import NotFoundPage from "../components/NotFoundPage";
 import PrivateRoute from "./PrivateRoute";
+// import PublicRoute from "./PublicRoute";
 
 export const history = createBrowserHistory();
-// const histo = BrowserRouterProps()
 
 const AppRouter = () => (
   <HistoryRouter history={history}>
     <div>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
-
+        <Route
+          path="/"
+          element={<LoginPage />}
+        />
         //! Route V6 uses this to properly use Private routes
         <Route
-          path="dashboard"
+          path="/dashboard"
           element={
             <PrivateRoute>
               <ExpenseDashboardPage />
@@ -36,7 +38,7 @@ const AppRouter = () => (
         />
         //! Route V6 uses this to properly use Private routes
         <Route
-          path="create"
+          path="/create"
           element={
             <PrivateRoute>
               <AddExpensePage />
