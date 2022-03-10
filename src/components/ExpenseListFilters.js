@@ -29,7 +29,7 @@ class ExpenseListFilters extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="content-container">
         <input
           type="text"
           name=""
