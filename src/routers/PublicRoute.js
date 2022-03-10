@@ -3,16 +3,17 @@ import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import Header from "../components/Header";
+import LoginPage from "../components/LoginPage";
 
 //! Route V6 uses this to properly use Private routes
-export const PrivateRoute = ({ children, isAuthenticated }) => {
+export const PublicRoute = ({ children, isAuthenticated }) => {
   return isAuthenticated ? (
-    <div>
-      <Header />
-      {children}
-    </div>
+    <Navigate to="/dashboard" />
   ) : (
-    <Navigate to="/" />
+    <div>
+      <LoginPage />
+      {/* {children} */}
+    </div>
   );
 };
 
@@ -22,4 +23,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps)(PublicRoute);

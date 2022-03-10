@@ -13,7 +13,6 @@ import LoginPage from "../components/LoginPage";
 import AddExpensePage from "../components/AddExpensePage";
 import EditExpensePage from "../components/EditExpensePage";
 import ExpenseDashboardPage from "../components/ExpenseDashboardPage";
-import HelpPage from "../components/HelpPage";
 import NotFoundPage from "../components/NotFoundPage";
 import PrivateRoute from "./PrivateRoute";
 
@@ -25,6 +24,7 @@ const AppRouter = () => (
     <div>
       <Routes>
         <Route path="/" element={<LoginPage />} />
+
         //! Route V6 uses this to properly use Private routes
         <Route
           path="dashboard"
@@ -34,6 +34,7 @@ const AppRouter = () => (
             </PrivateRoute>
           }
         />
+        //! Route V6 uses this to properly use Private routes
         <Route
           path="create"
           element={
@@ -42,6 +43,7 @@ const AppRouter = () => (
             </PrivateRoute>
           }
         />
+        //! Route V6 uses this to properly use Private routes
         <Route
           path="/edit/"
           element={
@@ -50,6 +52,7 @@ const AppRouter = () => (
             </PrivateRoute>
           }
         />
+        //! Route V6 uses this to properly use Private routes
         <Route
           path="/edit/:id"
           element={
@@ -58,7 +61,6 @@ const AppRouter = () => (
             </PrivateRoute>
           }
         />
-        <Route path="help" element={<HelpPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
