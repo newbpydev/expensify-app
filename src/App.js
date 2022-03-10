@@ -15,6 +15,8 @@ import "react-dates/lib/css/_datepicker.css";
 
 import AppRouter, { history } from "./routers/AppRouter";
 
+import LoadingPage from "./components/LoadingPage"
+
 const store = configureStore();
 
 const jsx = (
@@ -25,7 +27,7 @@ const jsx = (
 
 ReactDOM.render(
   <React.StrictMode>
-    <p>Loading...</p>
+    <LoadingPage />
   </React.StrictMode>,
   document.getElementById("root")
 );
